@@ -27,11 +27,12 @@ module CalculatorMain(
     input [1:0] operator,
     input clock,
     input reset,
-    output reg [3:0] solution,
+    output reg [7:0] solution,
     output reg carryOut
     );
     
-    wire [3:0] sum, diff, prod, quot;
+    wire [3:0] sum, diff, quot;
+    wire [7:0] prod;
 
     wire addCarry, subCarry, multCarry, divCarry;
 
@@ -93,11 +94,11 @@ module CalculatorMain(
     always @(*) begin
         case (next_state)
             addition: begin
-                solution = sum;
+                solution = {4'b0000, sum};
                 carryOut = addCarry;
             end
             subtraction: begin
-                solution = diff;
+                solution = {4'b0000, diff};
                 carryOut = subCarry;
             end
             multiplication: begin
@@ -105,7 +106,7 @@ module CalculatorMain(
                 carryOut = multCarry;
             end
             division: begin
-                solution = quot;
+                solution = {4'b0000, quot};
                 carryOut = divCarry;
             end
             default: begin

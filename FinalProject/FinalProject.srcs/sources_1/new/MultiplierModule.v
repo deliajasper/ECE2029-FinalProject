@@ -27,12 +27,10 @@ module MultiplierModule(
     output [7:0] product,
     output carryOut
     ); 
-    wire [11:0]sums;
+    wire [12:0]sums;
     wire c0, c1, c2,c3,c4,c5,c6,c7,c8,c9,c10,c11; // temporary carries
     assign product[0]=A[0]&B[0];
-    
-    wire sums2_alt;
-    wire sums9_alt;
+   
     
     HalfAdder HA0 (
         .A((B[0]&A[1])),
@@ -59,67 +57,68 @@ assign product[2]=sums[2];
         .A((B[0]&A[3])), 
         .B((B[1]&A[2])), 
         .carryIn(c1), 
-        .sum(sums2_alt), 
+        .sum(sums[3]), 
         .carryOut(c3)
     );
-    HalfAdder HA2 (
-        .A((sums2_alt)),
+    FullAdd HA2 (
+        .A((sums[3])),
         .B((B[2]&A[1])),
-        .s(sums[3]),  // Intermediate sum
-        .c(c4)   // Carry from first half-adder
+        .carryIn(c2),
+        .sum(sums[4]),  // Intermediate sum
+        .carryOut(c4)   // Carry from first half-adder
     );
     HalfAdder HA3 (
-        .A((sums[3])),
+        .A((sums[4])),
         .B((B[3]&A[0])),
-        .s(sums[4]),  // Intermediate sum
+        .s(sums[5]),  // Intermediate sum
         .c(c5)   // Carry from first half-adder
     );
-assign product[3]=sums[4];
+assign product[3]=sums[5];
   HalfAdder HA4 (
         .A(c3),
         .B((B[1]&A[3])),
-        .s(sums[5]),  // Intermediate sum
+        .s(sums[6]),  // Intermediate sum
         .c(c6)   // Carry from first half-adder
     );
     FullAdd fa2 (
-        .A(sums[5]), 
+        .A(sums[6]), 
         .B((B[2]&A[2])), 
         .carryIn(c4), 
-        .sum(sums[6]), 
+        .sum(sums[7]), 
         .carryOut(c7)
     );
 
     FullAdd fa3 (
-        .A(sums[6]), 
+        .A(sums[7]), 
         .B((B[3]&A[1])), 
         .carryIn(c5), 
-        .sum(sums[7]), 
+        .sum(sums[8]), 
         .carryOut(c8)
     );
-  assign product[4]=sums[7];
+  assign product[4]=sums[8];
  FullAdd fa4 (
         .A(c6), 
         .B((A[3]&B[2])), 
-        .carryIn(c4), 
-        .sum(sums[8]), 
+        .carryIn(c7), 
+        .sum(sums[9]), 
         .carryOut(c9)
     );
   FullAdd fa5 (
-        .A(sums[8]), 
+        .A(sums[9]), 
         .B((A[2]&B[3])), 
         .carryIn(c8), 
-        .sum(sums[9]), 
+        .sum(sums[10]), 
         .carryOut(c10)
     );
-    assign product[5]=sums[9];
+    assign product[5]=sums[10];
 FullAdd fa6 (
         .A(c9), 
         .B((A[3]&B[3])), 
         .carryIn(c10), 
-        .sum(sums9_alt), 
+        .sum(sums[11]), 
         .carryOut(c11)
     );
-    assign product[6] = sums9_alt;   // FA6 sum output
+    assign product[6] = sums[11];   // FA6 sum output
     assign product[7] = c11;         // FA6 carry output
 
 endmodule

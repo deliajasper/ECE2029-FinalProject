@@ -5,10 +5,8 @@ Running: C:/xlinx/2025.1/Vivado/bin/unwrapped/win64.o/xelab.exe --incr --debug t
 Using 2 slave threads.
 Starting static elaboration
 Pass Through NonSizing Optimizer
-WARNING: [VRFC 10-3091] actual bit length 29 differs from formal bit length 30 for port 'display' [C:/Users/Delia/Desktop/ECE2029/FinalProject/FinalProject.srcs/sim_1/new/BigCalcSim.v:45]
-WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 1 for port 'carryIn' [C:/Users/Delia/Desktop/ECE2029/FinalProject/FinalProject.srcs/sources_1/new/CalculatorMain.v:50]
-WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 1 for port 'carryIn' [C:/Users/Delia/Desktop/ECE2029/FinalProject/FinalProject.srcs/sources_1/new/CalculatorMain.v:58]
-WARNING: [VRFC 10-3091] actual bit length 4 differs from formal bit length 8 for port 'product' [C:/Users/Delia/Desktop/ECE2029/FinalProject/FinalProject.srcs/sources_1/new/CalculatorMain.v:67]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 1 for port 'carryIn' [C:/Users/Delia/Desktop/ECE2029/FinalProject/FinalProject.srcs/sources_1/new/CalculatorMain.v:51]
+WARNING: [VRFC 10-3091] actual bit length 32 differs from formal bit length 1 for port 'carryIn' [C:/Users/Delia/Desktop/ECE2029/FinalProject/FinalProject.srcs/sources_1/new/CalculatorMain.v:59]
 Completed static elaboration
 Starting simulation data flow analysis
 Completed simulation data flow analysis

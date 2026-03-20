@@ -20,8 +20,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 module DigitSplitter (
-    input  [3:0] value,     // 0-15
-    output reg [3:0] tens,  // 0-1
+    input  [7:0] value,     // 0-15
+    output reg [3:0] tens,  // 0-9
     output reg [3:0] ones   // 0-9 or 0-5
 );
 
@@ -30,8 +30,8 @@ module DigitSplitter (
             tens = 0;
             ones = value;
         end else begin
-            tens = 1;
-            ones = value - 10;
+            tens = value/10;
+            ones = value - (tens*10);
         end
     end
 
@@ -45,11 +45,11 @@ module DisplayMain(
     input [1:0] operator,
     input clock,
     input reset,
-    output reg [3:0] sol,
-    output reg [29:0] display
+    output reg [7:0] sol,
+    output reg [30:0] display
     );
     
-    wire [3:0] solution;
+    wire [7:0] solution;
     wire carryOut;
     
     wire [3:0] tens;
